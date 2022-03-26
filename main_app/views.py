@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
+from .models import Car
 
 
 # Create your views here.
@@ -12,18 +13,8 @@ class Home(TemplateView):
 class About(TemplateView):
     template_name = "about.html"
 
-class Car:
-    def __init__(self, name, year, color):
-        self.name = name
-        self.year = year
-        self.color = color
 
-cars = [
-    Car("Ford", 2011, "Red"),
-    Car("Toyota", 2008, "Blue"),
-    Car("Suzuki", 1984, "Green"),
-    Car("Honda", 2020, "Yellow"),
-]
+cars = Car.objects.all()
 
 class CarList(TemplateView):
     template_name = 'carlist.html'

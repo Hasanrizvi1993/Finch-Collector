@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'djangocars.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'djangocars',
+        'NAME': 'djangocars2',
     }
 }
 
