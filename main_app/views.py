@@ -3,8 +3,11 @@ from django.views import View
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
 from .models import Car
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
+from django.urls import reverse
+
+
 
 
 
@@ -57,3 +60,20 @@ class Car_Create(CreateView):
 class CarDetail(DetailView):
     model = Car
     template_name = "car_detail.html"
+
+#update view
+
+class CarUpdate(UpdateView):
+    model = Car
+    fields = ['name', 'img', 'year', 'color']
+    template_name = "car_update.html"
+    
+    def get_success_url(self):
+        return reverse('car_detail', kwargs={'pk': self.object.pk})
+
+#delete view
+
+class CarDelete(DeleteView):
+    model = Car
+    template_name = "car_delete_confirmation.html"
+    success_url = "/cars/"
