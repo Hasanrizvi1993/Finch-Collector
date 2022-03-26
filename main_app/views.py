@@ -3,6 +3,9 @@ from django.views import View
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
 from .models import Car
+from django.views.generic.edit import CreateView
+from django.views.generic import DetailView
+
 
 
 # Create your views here.
@@ -35,6 +38,22 @@ class CarList(TemplateView):
         if name != None:
             # .filter is the sql WHERE statement and name__icontains is doing a search for any name that contains the query param
             context["cars"] = Car.objects.filter(name__icontains=name)
+            context["header"] = f"Searching for {name}"
         else:
             context["cars"] = Car.objects.all()
+            context["header"] = "Our Cars"
         return context
+
+# create View
+
+class Car_Create(CreateView):
+    model = Car
+    fields = ['name', 'img', 'year', 'color']
+    template_name = "car_create.html"
+    success_url = "/cars/"
+
+#detail view
+
+class CarDetail(DetailView):
+    model = Car
+    template_name = "car_detail.html"
