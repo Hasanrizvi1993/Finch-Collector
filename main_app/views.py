@@ -3,7 +3,7 @@ from django.views import View
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.views.generic.base import TemplateView
-from .models import Car
+from .models import Car, CarType
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.urls import reverse
@@ -95,3 +95,32 @@ def profile(request, username):
     user = User.objects.get(username=username)
     cars = Car.objects.filter(user=user)
     return render(request, 'profile.html', {'username': username, 'cars': cars})
+
+
+
+#CARTYPE VIEWS
+
+def cartypes_index(request):
+    cartypes = CarType.objects.all()
+    return render(request, 'cartype_index.html', {'cartype': cartype})
+
+def cartypes_show(request, cartype_id):
+    cattoy = CarType.objects.get(id=cartype_id)
+    return render(request, 'cartype_show.html', {'cartype': cartype})
+
+class CarTypeCreate(CreateView):
+    model = CarType
+    fields = '__all__'
+    template_name = "cartype_form.html"
+    success_url = '/cartype'
+
+class CatToyUpdate(UpdateView):
+    model = CarType
+    fields = ['name', 'color']
+    template_name = "cartype_update.html"
+    success_url = '/cartype'
+
+class CatToyDelete(DeleteView):
+    model = CarType
+    template_name = "cartype_confirm_delete.html"
+    success_url = '/cartype'

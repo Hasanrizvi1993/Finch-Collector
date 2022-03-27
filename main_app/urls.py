@@ -11,6 +11,12 @@ urlpatterns = [
     path('cars/<int:pk>/update', views.CarUpdate.as_view(), name="car_update"),
     path('cars/<int:pk>/delete', views.CarDelete.as_view(), name="car_delete"),
     path('user/<username>/', views.profile, name='profile'),
+    #cartype routes
+    path('cartypes/', views.cartypes_index, name='cartypes_index'),
+    path('cartypes/<int:cartype_id>', views.cartype_show, name='cartype_show'),
+    path('cartypes/create/', views.CarTypeCreate.as_view(), name='cartypes_create'),
+    path('cartypes/<int:pk>/update/', views.CarTypeUpdate.as_view(), name='cartypes_update'),
+    path('cartypes/<int:pk>/delete/', views.CarTypeDelete.as_view(), name='cartypes_delete'),
 
 ]
 
