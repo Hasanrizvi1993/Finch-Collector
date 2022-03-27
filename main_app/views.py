@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.views.generic.base import TemplateView
 from .models import Car
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.urls import reverse
+from django.contrib.auth.models import User
+
 
 
 
@@ -55,6 +58,12 @@ class Car_Create(CreateView):
     template_name = "car_create.html"
     success_url = "/cars/"
 
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return HttpResponseRedirect('/cars')
+
 #detail view
 
 class CarDetail(DetailView):
@@ -77,3 +86,12 @@ class CarDelete(DeleteView):
     model = Car
     template_name = "car_delete_confirmation.html"
     success_url = "/cars/"
+
+#user
+
+# add this new view function
+
+def profile(request, username):
+    user = User.objects.get(username=username)
+    cars = Car.objects.filter(user=user)
+    return render(request, 'profile.html', {'username': username, 'cars': cars})
