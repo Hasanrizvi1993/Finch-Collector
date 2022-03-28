@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Car Type Details</h1>
+
+<div>
+    <div>
+        <p>Car Type: {{ cartype.type }}</p>
+    </div>
+    <div>
+        <a href="{% url 'cartypes_update' cartype.id %}">Edit</a>
+        <a href="{% url 'cartypes_delete' cartype.id %}">Delete</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Cat Toy List</h1>
+
+{% for cartype in cartypes %}
+    <div>
+        <a href="{% url 'cartypes_show' cartype.id %}">
+            <div class="card-content">
+                <p>Type: {{ cartype.type }}</p>
+            </div>
+        </a>
+    </div>
+{% endfor %}
+
+{% endblock %}
