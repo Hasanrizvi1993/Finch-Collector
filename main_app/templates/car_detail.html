@@ -4,9 +4,17 @@
 
 <div>
     <img src="{{car.img}}" alt="{{car.name}}" />
-    <h1>{{car.name}}</h1>
+    <h1>Name: {{car.name}}</h1>
     <h3>Year: {{car.year}}</h3>
     <h3>Color: {{car.color}}</h3>
+
+    <h3>Car Type:</h3>
+    {% for cartype in car.cartypes.all %}
+        <div>{{cartype.type}}</div>
+    {% empty %}
+        <div>Car Has No Type :(</div>
+    {% endfor %}
+
     <a href="{% url 'car_update' car.pk %}">Update</a>
     <a href="{% url 'car_delete' car.pk %}">Delete</a>
 </div>

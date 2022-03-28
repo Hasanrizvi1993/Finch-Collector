@@ -54,7 +54,7 @@ class CarList(TemplateView):
 
 class Car_Create(CreateView):
     model = Car
-    fields = ['name', 'img', 'year', 'color']
+    fields = ['name', 'img', 'year', 'color', 'cartypes']
     template_name = "car_create.html"
     success_url = "/cars/"
 
@@ -74,7 +74,7 @@ class CarDetail(DetailView):
 
 class CarUpdate(UpdateView):
     model = Car
-    fields = ['name', 'img', 'year', 'color']
+    fields = ['name', 'img', 'year', 'color', 'cartypes']
     template_name = "car_update.html"
     
     def get_success_url(self):

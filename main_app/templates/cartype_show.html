@@ -6,6 +6,12 @@
 <div>
     <div>
         <p>Car Type: {{ cartype.type }}</p>
+        <p>Owned by:</p>
+        {% for car in cartype.car_set.all %}
+            <p>{{car.name}}</p>
+        {% empty %}
+            <p>Nobody Has This Type</p>
+        {% endfor %}
     </div>
     <div>
         <a href="{% url 'cartypes_update' cartype.id %}">Edit</a>
